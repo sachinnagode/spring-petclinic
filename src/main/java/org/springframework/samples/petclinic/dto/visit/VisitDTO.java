@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.dto.pet;
+package org.springframework.samples.petclinic.dto.visit;
 
 import lombok.Data;
 

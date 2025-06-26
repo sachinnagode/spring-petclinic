@@ -1,12 +1,12 @@
 package org.springframework.samples.petclinic.dto.owner;
 
 import lombok.Data;
-import org.springframework.samples.petclinic.dto.pet.PetDTO;
+import org.springframework.samples.petclinic.dto.pet.PetResponse;
 
 import java.util.List;
 
 @Data
-public class OwnerDTO {
+public class OwnerResponse {
 
 	private Integer id;
 
@@ -20,6 +20,6 @@ public class OwnerDTO {
 
 	private String telephone;
 
-	private List<PetDTO> pets;
+	private List<PetResponse> pets;
 
 }

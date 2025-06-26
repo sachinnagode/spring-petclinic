@@ -30,23 +30,23 @@ public class GlobalRestExceptionHandler {
 		List<Map<String, String>> fieldErrors = ex.getBindingResult()
 			.getFieldErrors()
 			.stream()
-			.map(error -> Map.of("field", error.getField(), "message", error.getDefaultMessage()))
+			.map(error -> Map.of(FIELD, error.getField(), MESSAGE, error.getDefaultMessage()))
 			.toList();
 
-		return buildResponse(HttpStatus.BAD_REQUEST, "Validation Failed", "Input validation error", ex,
-				Map.of("errors", fieldErrors));
+		return buildResponse(HttpStatus.BAD_REQUEST, VALIDATION_FAILED, INPUT_VALIDATION_ERROR, ex,
+				Map.of(ERROR, fieldErrors));
 	}
 
 	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<Map<String, Object>> handleNullPointerException(NullPointerException ex) {
 		log.error("NullPointerException: {}", ex.getMessage(), ex);
-		return buildResponse(HttpStatus.BAD_REQUEST, "Null reference encountered", ex.getMessage(), ex);
+		return buildResponse(HttpStatus.BAD_REQUEST, NULL_REFERENCE_ENCOUNTERED, ex.getMessage(), ex);
 	}
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex) {
 		log.error("Unhandled Exception: {}", ex.getMessage(), ex);
-		return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", ex.getMessage(), ex);
+		return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, INTERNAL_SERVER_ERROR, ex.getMessage(), ex);
 	}
 
 	private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String error, String message,
@@ -61,7 +61,7 @@ public class GlobalRestExceptionHandler {
 		body.put(STATUS, status.value());
 		body.put(ERROR, error);
 		body.put(MESSAGE, message);
-		body.put("exception", ex.getClass().getSimpleName());
+		body.put(EXCEPTION, ex.getClass().getSimpleName());
 		body.putAll(extraFields);
 		return new ResponseEntity<>(body, status);
 	}

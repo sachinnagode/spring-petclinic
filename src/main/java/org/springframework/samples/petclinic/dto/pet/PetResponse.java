@@ -1,12 +1,13 @@
 package org.springframework.samples.petclinic.dto.pet;
 
 import lombok.Data;
+import org.springframework.samples.petclinic.dto.visit.VisitDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class PetDTO {
+public class PetResponse {
 
 	private Integer id;
 

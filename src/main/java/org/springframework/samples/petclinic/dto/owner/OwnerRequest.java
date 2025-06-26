@@ -1,15 +1,11 @@
 package org.springframework.samples.petclinic.dto.owner;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class OwnerUpdateRequest {
-
-	@NotNull(message = "Owner ID is required for update")
-	private Integer id;
+public class OwnerRequest {
 
 	@NotBlank(message = "First name is required")
 	private String firstName;
